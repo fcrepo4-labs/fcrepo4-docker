@@ -18,7 +18,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 * Ubuntu 14.04 64-bit machine with: 
   * [Tomcat 7](http://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
-  * [Fedora 4.3.0](http://fedora.info/about) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
+  * [Fedora 4.3.0](https://wiki.duraspace.org/display/FF/Fedora+4.3.0+Release+Notes) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
     * No authentication configured
   * [Solr 4.10.3](http://lucene.apache.org/solr/) at [http://localhost:8080/solr](http://localhost:8080/solr), for indexing & searching your content.
     * Installed in "/var/lib/tomcat7/solr"
