@@ -29,4 +29,4 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
   * [Fcrepo-camel-toolbox 4.3.0](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
     * Installed in Tomcat container
 
-  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, thus the Fedora 4.3.0 URL is http://192.168.99.100:8080/fcrepo 
+  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4.3.0 URL is http://192.168.99.100:8080/fcrepo 
