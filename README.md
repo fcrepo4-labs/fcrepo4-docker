@@ -1,6 +1,6 @@
 # Fedora 4 Docker Repo
 
-This is the Git repo of the Docker image for [Fedora 4 docker hub](https://hub.docker.com/r/yinlinchen/fcrepo4-docker/). Please see the Hub page for the full readme on how to use the Docker image and for information regarding contributing and issues.
+This is the Git repo of the Docker image for [Fedora 4 docker](https://hub.docker.com/r/yinlinchen/fcrepo4-docker/). Please see the [Hub page](https://hub.docker.com/r/yinlinchen/fcrepo4-docker/) for the full readme on how to use the Docker image and for information regarding contributing and issues.
 
 ## Requirements
 
@@ -8,8 +8,8 @@ This is the Git repo of the Docker image for [Fedora 4 docker hub](https://hub.d
 
 ## Usage
 
-1. `docker pull fcrepo4-docker`
-2. `docker run -it -p 8080:8080 -p 3030:3030 -d fcrepo4-docker:latest`
+1. `docker pull yinlinchen/fcrepo4-docker`
+2. `docker run -it -p 8080:8080 -p 3030:3030 -d yinlinchen/fcrepo4-docker:4.3.0`
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 
