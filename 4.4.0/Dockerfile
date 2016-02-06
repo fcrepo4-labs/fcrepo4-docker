@@ -91,7 +91,7 @@ RUN chown -hR tomcat7:tomcat7 $SOLR_HOME
 
 # Install Fuseki
 ENV FUSEKI_VERSION 2.3.0
-ENV FUSEKI_BASE /etc/fuseki
+ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
 RUN mkdir -p $FUSEKI_BASE/configuration \
