@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
+
 # Install essential packages
 RUN apt-get update && apt-get install -y \
 	build-essential \
@@ -12,6 +13,7 @@ RUN apt-get update && apt-get install -y \
 	vim \
 	wget \
 	htop tree zsh fish
+
 
 # Install Java 8
 # Define commonly used JAVA_HOME variable
@@ -24,11 +26,12 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/cache/oracle-jdk8-installer
 
+
 # Install Tomcat 7.
 ENV CATALINA_HOME /usr/local/tomcat7
 ENV PATH $CATALINA_HOME/bin:$PATH
 ENV TOMCAT_MAJOR 7
-ENV TOMCAT_VERSION 7.0.64
+ENV TOMCAT_VERSION 7.0.67
 ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN mkdir -p "$CATALINA_HOME" \
@@ -41,15 +44,17 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
 
+
 # Make the ingest directory
 RUN mkdir /mnt/ingest \
 	&& chown -R tomcat7:tomcat7 /mnt/ingest
 
 VOLUME /mnt/ingest
 
+
 # Install Fedora4
-ENV FEDORA_VERSION 4.3.0
-ENV FEDORA_TAG 4.3.0
+ENV FEDORA_VERSION 4.4.0
+ENV FEDORA_TAG 4.4.0
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
@@ -58,6 +63,7 @@ RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& curl -fSL https://github.com/fcrepo4/fcrepo4/releases/download/fcrepo-$FEDORA_TAG/fcrepo-webapp-$FEDORA_VERSION.war -o fcrepo.war \
 	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
+
 
 # Install Solr
 ENV SOLR_VERSION 4.10.3
@@ -79,37 +85,49 @@ RUN cd /tmp \
 	&& touch /var/lib/tomcat7/velocity.log \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/velocity.log
 
-COPY schema.xml $SOLR_HOME/collection1/conf/
+COPY config/schema.xml $SOLR_HOME/collection1/conf/
 
-# Install Fedora Camel Toolbox
-ENV SOLR_URL_ARG "localhost:8080/solr/collection1"
-ENV CATALINA_OPTS "${CATALINA_OPTS} -Dsolr.base.url=${SOLR_URL_ARG}"
-
-RUN cd /tmp \
-	&& curl -fSL https://github.com/fcrepo4-labs/fcrepo-camel-toolbox/releases/download/fcrepo-camel-toolbox-${FEDORA_TAG}/fcrepo-camel-webapp-at-is-it-rs-${FEDORA_VERSION}.war -o "fcrepo-camel-webapp-at-is-it-rs-${FEDORA_VERSION}.war" \
-	&& cp "fcrepo-camel-webapp-at-is-it-rs-${FEDORA_VERSION}.war" /usr/local/tomcat7/webapps/fcrepo-camel-webapp.war \
-	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo-camel-webapp.war 
+RUN chown -hR tomcat7:tomcat7 $SOLR_HOME
 
 # Install Fuseki
-ENV FUSEKI_VERSION 1.3.0
-ENV FUSEKI_HOME /usr/share/fuseki
+ENV FUSEKI_VERSION 2.3.0
+ENV FUSEKI_BASE /usr/local/fuseki
+ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
-RUN mkdir $FUSEKI_HOME \
+RUN mkdir -p $FUSEKI_BASE/configuration \
+	&& chown -hR tomcat7:tomcat7 $FUSEKI_BASE \
 	&& cd /tmp \
-	&& curl -fSL http://www.apache.org/dist/jena/binaries/jena-fuseki1-"$FUSEKI_VERSION"-distribution.tar.gz -o jena-fuseki1-$FUSEKI_VERSION-distribution.tar.gz \
-	&& tar -xzvf jena-fuseki1-"$FUSEKI_VERSION"-distribution.tar.gz \
+	&& curl -fSL http://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz -o apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
+	&& tar -xzvf apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
+	&& mv apache-jena-fuseki-"$FUSEKI_VERSION" jena-fuseki1-"$FUSEKI_VERSION" \
 	&& cd jena-fuseki1-"$FUSEKI_VERSION" \
-	&& mv -v * $FUSEKI_HOME \
-	&& chown -hR tomcat7:tomcat7 $FUSEKI_HOME \
-	&& mkdir "$FUSEKI_HOME/test_data" \
-	&& ln -s $FUSEKI_HOME/fuseki /etc/init.d \
-	&& echo "FUSEKI_HOME=\"$FUSEKI_HOME\"" > /etc/default/fuseki \
-	&& echo "FUSEKI_ARGS=\"--update --loc=$FUSEKI_HOME/test_data /test\"" >> /etc/default/fuseki \
-	&& update-rc.d fuseki start 20 2 3 4 5 . stop 20 0 1 6 .
+	&& mv -v fuseki.war $FUSEKI_DEPLOY \
+	&& chown -hR tomcat7:tomcat7 $FUSEKI_DEPLOY/fuseki.war \
+	&& sleep 20
+
+COPY config/shiro.ini $FUSEKI_BASE
+COPY config/test.ttl $FUSEKI_BASE/configuration
+
+
+# Install Apache Karaf
+ENV KARAF_VERSION 4.0.1
+
+COPY config/karaf_service.script /root/
+
+RUN cd /tmp \
+	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://mirror.csclub.uwaterloo.ca/apache/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
+	&& tar -zxvf apache-karaf-$KARAF_VERSION.tar.gz \
+	&& mv /tmp/apache-karaf-$KARAF_VERSION /opt \
+	&& ln -s "/opt/apache-karaf-$KARAF_VERSION" /opt/karaf
+
+# Fedora Camel Toolbox
+COPY config/fedora_camel_toolbox.script /root/
+COPY scripts/fedora_camel_toolbox.sh /root/
+
+COPY scripts/runall.sh /root/
 
 EXPOSE 8080
-EXPOSE 3030
 
 WORKDIR $CATALINA_HOME
 
-CMD /etc/init.d/fuseki start && catalina.sh run 
+CMD sh /root/runall.sh
