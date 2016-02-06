@@ -29,7 +29,7 @@ ENV CATALINA_HOME /usr/local/tomcat7
 ENV PATH $CATALINA_HOME/bin:$PATH
 ENV TOMCAT_MAJOR 7
 ENV TOMCAT_VERSION 7.0.64
-ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+ENV TOMCAT_TGZ_URL http://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN mkdir -p "$CATALINA_HOME" \
 	&& cd $CATALINA_HOME \
@@ -91,7 +91,7 @@ RUN cd /tmp \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo-camel-webapp.war 
 
 # Install Fuseki
-ENV FUSEKI_VERSION 1.3.0
+ENV FUSEKI_VERSION 1.3.1
 ENV FUSEKI_HOME /usr/share/fuseki
 
 RUN mkdir $FUSEKI_HOME \
