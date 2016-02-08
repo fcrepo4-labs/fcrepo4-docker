@@ -94,7 +94,8 @@ ENV FUSEKI_VERSION 2.3.0
 ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
-RUN mkdir -p $FUSEKI_BASE/configuration \
+RUN mkdir -p "$FUSEKI_BASE" \ 
+	&& mkdir -p $FUSEKI_BASE/configuration \
 	&& chown -hR tomcat7:tomcat7 $FUSEKI_BASE \
 	&& cd /tmp \
 	&& curl -fSL http://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz -o apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
