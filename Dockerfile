@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:trusty
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
@@ -94,8 +94,8 @@ ENV FUSEKI_VERSION 2.3.0
 ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
-RUN mkdir -p "$FUSEKI_BASE" \ 
-	&& mkdir -p $FUSEKI_BASE/configuration \
+RUN cd && mkdir -p "$FUSEKI_BASE" \ 
+	&& mkdir -p "$FUSEKI_BASE"/configuration \
 	&& chown -hR tomcat7:tomcat7 $FUSEKI_BASE \
 	&& cd /tmp \
 	&& curl -fSL http://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz -o apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
@@ -103,12 +103,13 @@ RUN mkdir -p "$FUSEKI_BASE" \
 	&& mv apache-jena-fuseki-"$FUSEKI_VERSION" jena-fuseki1-"$FUSEKI_VERSION" \
 	&& cd jena-fuseki1-"$FUSEKI_VERSION" \
 	&& mv -v fuseki.war $FUSEKI_DEPLOY \
-	&& chown -hR tomcat7:tomcat7 $FUSEKI_DEPLOY/fuseki.war \
-	&& sleep 20
+	&& chown -hR tomcat7:tomcat7 $FUSEKI_DEPLOY/fuseki.war
 
-COPY config/shiro.ini $FUSEKI_BASE
-COPY config/test.ttl $FUSEKI_BASE/configuration
+COPY config/shiro.ini /root/
+COPY config/test.ttl /root/
 
+RUN cp /root/shiro.ini  /usr/local/fuseki/. \
+	&& cp /root/test.ttl  /usr/local/fuseki/configuration/.
 
 # Install Apache Karaf
 ENV KARAF_VERSION 4.0.1
