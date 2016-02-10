@@ -18,4 +18,4 @@
 
 :tdb_dataset_readwrite
         a             tdb:DatasetTDB ;
-        tdb:location  "/etc/fuseki/databases/test_data" .
+        tdb:location  "/usr/local/fuseki/databases/test_data" .

@@ -53,8 +53,8 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.4.0
-ENV FEDORA_TAG 4.4.0
+ENV FEDORA_VERSION 4.5.0
+ENV FEDORA_TAG 4.5.0
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
