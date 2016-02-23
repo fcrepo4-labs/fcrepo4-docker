@@ -56,12 +56,13 @@ VOLUME /mnt/ingest
 ENV FEDORA_VERSION 4.5.0
 ENV FEDORA_TAG 4.5.0
 
-RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
-	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
-	&& chmod g-w /var/lib/tomcat7/fcrepo4-data \
+COPY fcrepo.war /root/
+
+RUN mkdir -p /usr/local/tomcat7/fcrepo4-data \
+	&& chown tomcat7:tomcat7 /usr/local/tomcat7/fcrepo4-data \
+	&& chmod g-w /usr/local/tomcat7/fcrepo4-data \
 	&& cd /tmp \
-	&& curl -fSL https://github.com/fcrepo4/fcrepo4/releases/download/fcrepo-$FEDORA_TAG/fcrepo-webapp-$FEDORA_VERSION.war -o fcrepo.war \
-	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
+	&& cp /root/fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
 
 
@@ -82,8 +83,8 @@ RUN cd /tmp \
 	&& chown -hR tomcat7:tomcat7 /usr/local/tomcat7/lib \
 	&& cp -Rv /tmp/solr-"$SOLR_VERSION"/example/solr/* $SOLR_HOME \
 	&& chown -hR tomcat7:tomcat7 $SOLR_HOME \
-	&& touch /var/lib/tomcat7/velocity.log \
-	&& chown tomcat7:tomcat7 /var/lib/tomcat7/velocity.log
+	&& touch /usr/local/tomcat7/velocity.log \
+	&& chown tomcat7:tomcat7 /usr/local/tomcat7/velocity.log
 
 COPY config/schema.xml $SOLR_HOME/collection1/conf/
 
@@ -112,7 +113,7 @@ RUN cp /root/shiro.ini  /usr/local/fuseki/. \
 	&& cp /root/test.ttl  /usr/local/fuseki/configuration/.
 
 # Install Apache Karaf
-ENV KARAF_VERSION 4.0.1
+ENV KARAF_VERSION 4.0.4
 
 COPY config/karaf_service.script /root/
 

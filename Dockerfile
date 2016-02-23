@@ -53,14 +53,14 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.5.0
-ENV FEDORA_TAG 4.5.0
+ENV FEDORA_VERSION 4.5.1-SNAPSHOT
+ENV FEDORA_TAG 4.5.1-SNAPSHOT
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
 	&& chmod g-w /var/lib/tomcat7/fcrepo4-data \
 	&& cd /tmp \
-	&& curl -fSL https://github.com/fcrepo4/fcrepo4/releases/download/fcrepo-$FEDORA_TAG/fcrepo-webapp-$FEDORA_VERSION.war -o fcrepo.war \
+	&& curl -fSL https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-$FEDORA_TAG/fcrepo-webapp-plus-$FEDORA_VERSION.war -o fcrepo.war \
 	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
 
