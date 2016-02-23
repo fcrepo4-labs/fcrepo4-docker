@@ -32,7 +32,7 @@ ENV CATALINA_HOME /usr/local/tomcat7
 ENV PATH $CATALINA_HOME/bin:$PATH
 ENV TOMCAT_MAJOR 7
 ENV TOMCAT_VERSION 7.0.67
-ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+ENV TOMCAT_TGZ_URL http://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN mkdir -p "$CATALINA_HOME" \
 	&& cd $CATALINA_HOME \
