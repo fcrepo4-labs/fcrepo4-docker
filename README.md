@@ -22,7 +22,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
     * No authentication configured
   * [Solr 4.10.3](https://lucene.apache.org/solr/) at [http://localhost:8080/solr](https://localhost:8080/solr), for indexing & searching your content.
     * Installed in "/usr/local/tomcat7/solr"
-  * [Apache Karaf](http://karaf.apache.org/)
+  * [Apache Karaf 4.0.4](http://karaf.apache.org/)
     Installed in /opt/karaf
     Installed as a service apache-karaf
   * [Fuseki 2.3.0](https://jena.apache.org/documentation/serving_data/index.html) at [http://localhost:8080/fuseki](https://localhost:8080/fuseki), for querying and updating.
@@ -32,4 +32,4 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
   * [Fcrepo-camel-toolbox 4.4.0](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
     * Installed in Tomcat container
 
-  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4.3.0 URL is  [http://192.168.99.100:8080/fcrepo](https://192.168.99.100:8080/fcrepo)
+  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4 URL is  [http://192.168.99.100:8080/fcrepo](https://192.168.99.100:8080/fcrepo)
