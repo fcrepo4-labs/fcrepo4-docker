@@ -16,22 +16,22 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 ## In this Docker image
 
 * Ubuntu 14.04 64-bit machine with: 
-  * [Tomcat 7](https://tomcat.apache.org) at [http://localhost:8080](https://localhost:8080)
+  * [Tomcat 7](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
-  * [Fedora 4.5.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](https://localhost:8080/fcrepo)
+  * [Fedora 4.5.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
     * No authentication configured
-  * [Solr 4.10.3](https://lucene.apache.org/solr/) at [http://localhost:8080/solr](https://localhost:8080/solr), for indexing & searching your content.
+  * [Solr 4.10.3](https://lucene.apache.org/solr/) at [http://localhost:8080/solr](http://localhost:8080/solr), for indexing & searching your content.
     * Installed in "/usr/local/tomcat7/solr"
   * [Apache Karaf 4.0.4](http://karaf.apache.org/)
     Installed in /opt/karaf
     Installed as a service apache-karaf
-  * [Fuseki 2.3.0](https://jena.apache.org/documentation/serving_data/index.html) at [http://localhost:8080/fuseki](https://localhost:8080/fuseki), for querying and updating.
+  * [Fuseki 2.3.0](https://jena.apache.org/documentation/serving_data/index.html) at [http://localhost:8080/fuseki](http://localhost:8080/fuseki), for querying and updating.
     * Installed in "/usr/local/fuseki"
     * Dataset Path name "/test"
     * Persistent storage "/usr/local/fuseki/databases/test_data"
   * [Fcrepo-camel-toolbox 4.4.0](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
     * Installed in Tomcat container
 
-  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4 URL is  [http://192.168.99.100:8080/fcrepo](https://192.168.99.100:8080/fcrepo)
+  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4 URL is  [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo)
 
   ps2. For Fedora version 4.2.0 and 4.3.0, you should use -p 3030:3030 for Fuseki server. (e.g. `docker run -it -p 8080:8080 -p 3030:3030 -d yinlinchen/fcrepo4-docker:4.3.0`)
