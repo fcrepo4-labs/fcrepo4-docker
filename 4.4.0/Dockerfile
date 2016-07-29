@@ -112,7 +112,7 @@ RUN cp /root/shiro.ini  /usr/local/fuseki/. \
 	&& cp /root/test.ttl  /usr/local/fuseki/configuration/.
 
 # Install Apache Karaf
-ENV KARAF_VERSION 4.0.1
+ENV KARAF_VERSION 4.0.5
 
 COPY config/karaf_service.script /root/
 
