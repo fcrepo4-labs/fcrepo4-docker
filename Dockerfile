@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
