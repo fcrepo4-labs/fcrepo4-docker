@@ -53,8 +53,8 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.5.1-SNAPSHOT
-ENV FEDORA_TAG 4.5.1-SNAPSHOT
+ENV FEDORA_VERSION 4.5.1
+ENV FEDORA_TAG 4.5.1
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
@@ -90,7 +90,7 @@ COPY config/schema.xml $SOLR_HOME/collection1/conf/
 RUN chown -hR tomcat7:tomcat7 $SOLR_HOME
 
 # Install Fuseki
-ENV FUSEKI_VERSION 2.3.0
+ENV FUSEKI_VERSION 2.3.1
 ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
@@ -112,7 +112,7 @@ RUN cp /root/shiro.ini  /usr/local/fuseki/. \
 	&& cp /root/test.ttl  /usr/local/fuseki/configuration/.
 
 # Install Apache Karaf
-ENV KARAF_VERSION 4.0.1
+ENV KARAF_VERSION 4.0.5
 
 COPY config/karaf_service.script /root/
 
