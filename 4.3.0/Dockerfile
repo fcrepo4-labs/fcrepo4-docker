@@ -96,7 +96,7 @@ ENV FUSEKI_HOME /usr/share/fuseki
 
 RUN mkdir $FUSEKI_HOME \
 	&& cd /tmp \
-	&& curl -fSL http://www.apache.org/dist/jena/binaries/jena-fuseki1-"$FUSEKI_VERSION"-distribution.tar.gz -o jena-fuseki1-$FUSEKI_VERSION-distribution.tar.gz \
+	&& curl -fSL http://archive.apache.org/dist/jena/binaries/jena-fuseki1-"$FUSEKI_VERSION"-distribution.tar.gz -o jena-fuseki1-$FUSEKI_VERSION-distribution.tar.gz \
 	&& tar -xzvf jena-fuseki1-"$FUSEKI_VERSION"-distribution.tar.gz \
 	&& cd jena-fuseki1-"$FUSEKI_VERSION" \
 	&& mv -v * $FUSEKI_HOME \
