@@ -56,15 +56,12 @@ VOLUME /mnt/ingest
 ENV FEDORA_VERSION 4.5.1
 ENV FEDORA_TAG 4.5.1
 
-COPY fcrepo.war /root/
-
 RUN mkdir -p /usr/local/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/fcrepo4-data \
 	&& chmod g-w /usr/local/tomcat7/fcrepo4-data \
-	&& cd /tmp \
-	&& cp /root/fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
+	&& curl -fSL https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-$FEDORA_TAG/fcrepo-webapp-plus-$FEDORA_VERSION.war -o fcrepo.war \
+	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
-
 
 # Install Solr
 ENV SOLR_VERSION 4.10.3
@@ -91,7 +88,7 @@ COPY config/schema.xml $SOLR_HOME/collection1/conf/
 RUN chown -hR tomcat7:tomcat7 $SOLR_HOME
 
 # Install Fuseki
-ENV FUSEKI_VERSION 2.3.0
+ENV FUSEKI_VERSION 2.3.1
 ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
@@ -113,7 +110,7 @@ RUN cp /root/shiro.ini  /usr/local/fuseki/. \
 	&& cp /root/test.ttl  /usr/local/fuseki/configuration/.
 
 # Install Apache Karaf
-ENV KARAF_VERSION 4.0.4
+ENV KARAF_VERSION 4.0.5
 
 COPY config/karaf_service.script /root/
 
