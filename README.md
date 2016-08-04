@@ -42,3 +42,4 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 Current maintainers:
 
 * [Yinlin Chen](https://github.com/yinlinchen)
+* [James R. Griffin III](https://github.com/jrgriffiniii)
