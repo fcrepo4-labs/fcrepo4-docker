@@ -35,3 +35,10 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
   ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100, the Fedora 4 URL is  [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo)
 
   ps2. For Fedora version 4.2.0 and 4.3.0, you should use -p 3030:3030 for Fuseki server. (e.g. `docker run -it -p 8080:8080 -p 3030:3030 -d yinlinchen/fcrepo4-docker:4.3.0`)
+
+
+## Maintainers
+
+Current maintainers:
+
+* [Yinlin Chen](https://github.com/yinlinchen)
