@@ -44,6 +44,9 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
 
+RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/minimal-default/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
+	&& chmod +x $CATALINA_HOME/bin/setenv.sh
+
 
 # Make the ingest directory
 RUN mkdir /mnt/ingest \
@@ -53,8 +56,8 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.5.1
-ENV FEDORA_TAG 4.5.1
+ENV FEDORA_VERSION 4.6.0-RC-4
+ENV FEDORA_TAG 4.6.0-RC-4
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
