@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
@@ -19,10 +19,11 @@ RUN apt-get update && apt-get install -y \
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
-	&& add-apt-repository -y ppa:webupd8team/java \
-	&& apt-get update \
+RUN add-apt-repository -y ppa:webupd8team/java \
+	&& apt-get update -y \
+	&& echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
 	&& apt-get install -y oracle-java8-installer \
+	&& update-java-alternatives -s java-8-oracle \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/cache/oracle-jdk8-installer
 
@@ -43,6 +44,9 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& rm tomcat.tar.gz* \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
+
+RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/minimal-default/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
+	&& chmod +x $CATALINA_HOME/bin/setenv.sh
 
 
 # Make the ingest directory
@@ -134,3 +138,4 @@ EXPOSE 9080
 WORKDIR $CATALINA_HOME
 
 CMD sh /root/runall.sh
+
