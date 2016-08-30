@@ -119,7 +119,7 @@ ENV KARAF_VERSION 4.0.5
 COPY config/karaf_service.script /root/
 
 RUN cd /tmp \
-	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://mirror.csclub.uwaterloo.ca/apache/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
+	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://archive.apache.org/dist/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
 	&& tar -zxvf apache-karaf-$KARAF_VERSION.tar.gz \
 	&& mv /tmp/apache-karaf-$KARAF_VERSION /opt \
 	&& ln -s "/opt/apache-karaf-$KARAF_VERSION" /opt/karaf
