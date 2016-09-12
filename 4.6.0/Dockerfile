@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
@@ -32,7 +32,7 @@ RUN add-apt-repository -y ppa:webupd8team/java \
 ENV CATALINA_HOME /usr/local/tomcat7
 ENV PATH $CATALINA_HOME/bin:$PATH
 ENV TOMCAT_MAJOR 7
-ENV TOMCAT_VERSION 7.0.67
+ENV TOMCAT_VERSION 7.0.70
 ENV TOMCAT_TGZ_URL http://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN mkdir -p "$CATALINA_HOME" \
@@ -45,6 +45,9 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
 
+RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/minimal-default/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
+	&& chmod +x $CATALINA_HOME/bin/setenv.sh
+
 
 # Make the ingest directory
 RUN mkdir /mnt/ingest \
@@ -54,16 +57,15 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.5.0
-ENV FEDORA_TAG 4.5.0
+ENV FEDORA_VERSION 4.6.0
+ENV FEDORA_TAG 4.6.0
 
-COPY fcrepo.war /root/
-
-RUN mkdir -p /usr/local/tomcat7/fcrepo4-data \
-	&& chown tomcat7:tomcat7 /usr/local/tomcat7/fcrepo4-data \
-	&& chmod g-w /usr/local/tomcat7/fcrepo4-data \
+RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
+	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
+	&& chmod g-w /var/lib/tomcat7/fcrepo4-data \
 	&& cd /tmp \
-	&& cp /root/fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
+	&& curl -fSL https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-$FEDORA_TAG/fcrepo-webapp-plus-$FEDORA_VERSION.war -o fcrepo.war \
+	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
 
 
@@ -84,16 +86,16 @@ RUN cd /tmp \
 	&& chown -hR tomcat7:tomcat7 /usr/local/tomcat7/lib \
 	&& cp -Rv /tmp/solr-"$SOLR_VERSION"/example/solr/* $SOLR_HOME \
 	&& chown -hR tomcat7:tomcat7 $SOLR_HOME \
-	&& touch /usr/local/tomcat7/velocity.log \
-	&& chown tomcat7:tomcat7 /usr/local/tomcat7/velocity.log
+	&& touch /var/lib/tomcat7/velocity.log \
+	&& chown tomcat7:tomcat7 /var/lib/tomcat7/velocity.log
 
 COPY config/schema.xml $SOLR_HOME/collection1/conf/
 
 RUN chown -hR tomcat7:tomcat7 $SOLR_HOME
 
 # Install Fuseki
-ENV FUSEKI_VERSION 2.3.0
-ENV FUSEKI_BASE /usr/local/fuseki
+ENV FUSEKI_VERSION 2.3.1
+    ENV FUSEKI_BASE /usr/local/fuseki
 ENV FUSEKI_DEPLOY /usr/local/tomcat7/webapps
 
 RUN cd && mkdir -p "$FUSEKI_BASE" \ 

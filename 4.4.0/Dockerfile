@@ -19,10 +19,11 @@ RUN apt-get update && apt-get install -y \
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
-	&& add-apt-repository -y ppa:webupd8team/java \
-	&& apt-get update \
+RUN add-apt-repository -y ppa:webupd8team/java \
+	&& apt-get update -y \
+	&& echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
 	&& apt-get install -y oracle-java8-installer \
+	&& update-java-alternatives -s java-8-oracle \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/cache/oracle-jdk8-installer
 
@@ -117,7 +118,7 @@ ENV KARAF_VERSION 4.0.5
 COPY config/karaf_service.script /root/
 
 RUN cd /tmp \
-	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://mirror.csclub.uwaterloo.ca/apache/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
+	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://archive.apache.org/dist/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
 	&& tar -zxvf apache-karaf-$KARAF_VERSION.tar.gz \
 	&& mv /tmp/apache-karaf-$KARAF_VERSION /opt \
 	&& ln -s "/opt/apache-karaf-$KARAF_VERSION" /opt/karaf
