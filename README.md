@@ -16,9 +16,9 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 ## In this Docker image
 
 * Ubuntu 14.04 64-bit machine with: 
-  * [Tomcat 7](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
+  * [Tomcat 7.0.72](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
-  * [Fedora 4.5.1](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
+  * [Fedora 4.6.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
     * No authentication configured
   * [Solr 4.10.3](https://lucene.apache.org/solr/) at [http://localhost:8080/solr](http://localhost:8080/solr), for indexing & searching your content.
     * Installed in "/usr/local/tomcat7/solr"
@@ -29,7 +29,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
     * Installed in "/usr/local/fuseki"
     * Dataset Path name "/test"
     * Persistent storage "/usr/local/fuseki/databases/test_data"
-  * [Fcrepo-camel-toolbox 4.5.1](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
+  * [Fcrepo-camel-toolbox 4.6.0](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
     * Installed in Tomcat container
 
   ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100 or 127.0.0.1, the Fedora 4 URL is either [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo) or [http://127.0.0.1/fcrepo](http://127.0.0.1/fcrepo)
