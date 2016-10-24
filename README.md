@@ -32,7 +32,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
   * [Fcrepo-camel-toolbox 4.6.0](https://github.com/fcrepo4-labs/fcrepo-camel-toolbox)
     * Installed in Tomcat container
 
-  ps. MacOS: docker is configured to use the default machine with IP 192.168.99.100 or 127.0.0.1, the Fedora 4 URL is either [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo) or [http://127.0.0.1/fcrepo](http://127.0.0.1/fcrepo)
+  ps. MacOS: docker is configured to use the default machine with IP e.g. 192.168.99.100 or 127.0.0.1, the Fedora 4 URL is either [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo) or [http://127.0.0.1/fcrepo](http://127.0.0.1/fcrepo). You can use "docker-machine ip" to see your docker machine IP.
 
   ps2. For Fedora version 4.2.0 and 4.3.0, you should use -p 3030:3030 for Fuseki server. (e.g. `docker run -it -p 8080:8080 -p 3030:3030 -d yinlinchen/fcrepo4-docker:4.3.0`)
 
@@ -43,3 +43,4 @@ Current maintainers:
 
 * [Yinlin Chen](https://github.com/yinlinchen)
 * [James R. Griffin III](https://github.com/jrgriffiniii)
+* [Paul Mather](https://github.com/pmather)
