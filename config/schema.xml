@@ -243,6 +243,10 @@
         alternately, change the type="ignored" to some other type e.g. "text" if you want 
         unknown fields indexed and/or stored by default --> 
    <!--dynamicField name="*" type="ignored" multiValued="true" /-->
+
+   <!-- Catch all field for any field name not previously mentioned, this allows for different
+        fields from the fcrepo-camel-ldpath/fcrepo-camel-indexing-solr services -->
+   <dynamicField name="*" type="text_general" indexed="true" stored="true" multiValued="true"/>
    
 
 

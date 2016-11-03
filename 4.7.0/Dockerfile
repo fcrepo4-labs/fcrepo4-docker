@@ -32,7 +32,7 @@ RUN add-apt-repository -y ppa:webupd8team/java \
 ENV CATALINA_HOME /usr/local/tomcat7
 ENV PATH $CATALINA_HOME/bin:$PATH
 ENV TOMCAT_MAJOR 7
-ENV TOMCAT_VERSION 7.0.67
+ENV TOMCAT_VERSION 7.0.72
 ENV TOMCAT_TGZ_URL http://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 RUN mkdir -p "$CATALINA_HOME" \
@@ -45,7 +45,7 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
 
-RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/minimal-default/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
+RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
 	&& chmod +x $CATALINA_HOME/bin/setenv.sh
 
 
@@ -57,8 +57,8 @@ VOLUME /mnt/ingest
 
 
 # Install Fedora4
-ENV FEDORA_VERSION 4.6.0
-ENV FEDORA_TAG 4.6.0
+ENV FEDORA_VERSION 4.7.0
+ENV FEDORA_TAG 4.7.0
 
 RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
