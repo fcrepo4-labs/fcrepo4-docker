@@ -9,7 +9,7 @@ This is the Git repo of the Docker image for [Fedora 4 docker](https://hub.docke
 ## Usage
 
 1. `docker pull yinlinchen/fcrepo4-docker`
-2. `docker run -it -p 8080:8080 -p 9080:9080 -d yinlinchen/fcrepo4-docker:4.6.0`
+2. `docker run -it -p 8080:8080 -p 9080:9080 -d yinlinchen/fcrepo4-docker:4.7.0`
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 
