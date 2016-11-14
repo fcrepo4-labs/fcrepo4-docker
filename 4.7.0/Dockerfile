@@ -2,6 +2,8 @@ FROM ubuntu:14.04
 
 MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
+ARG FedoraConfig=
+ARG ModeshapeConfig=file-simple
 
 # Install essential packages
 RUN apt-get update && apt-get install -y \
@@ -45,7 +47,7 @@ RUN mkdir -p "$CATALINA_HOME" \
 	&& useradd -ms /bin/bash tomcat7 \
 	&& sed -i '$i<role rolename="fedoraUser"/>$i<role rolename="fedoraAdmin"/>$i<role rolename="manager-gui"/>$i<user username="testuser" password="password1" roles="fedoraUser"/>$i<user username="adminuser" password="password2" roles="fedoraUser"/>$i<user username="fedoraAdmin" password="secret3" roles="fedoraAdmin"/>$i<user username="fedora4" password="fedora4" roles="manager-gui"/>' /usr/local/tomcat7/conf/tomcat-users.xml
 
-RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json -Dfcrepo.home=/mnt/ingest"' > $CATALINA_HOME/bin/setenv.sh \
+RUN echo 'JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/'$ModeshapeConfig'/repository.json -Dfcrepo.home=/mnt/ingest -Dfcrepo.audit.container=/audit"' > $CATALINA_HOME/bin/setenv.sh \
 	&& chmod +x $CATALINA_HOME/bin/setenv.sh
 
 
@@ -64,7 +66,7 @@ RUN mkdir -p /var/lib/tomcat7/fcrepo4-data \
 	&& chown tomcat7:tomcat7 /var/lib/tomcat7/fcrepo4-data \
 	&& chmod g-w /var/lib/tomcat7/fcrepo4-data \
 	&& cd /tmp \
-	&& curl -fSL https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-$FEDORA_TAG/fcrepo-webapp-plus-$FEDORA_VERSION.war -o fcrepo.war \
+	&& curl -fSL https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-$FEDORA_TAG/fcrepo-webapp-plus-$FedoraConfig$FEDORA_VERSION.war -o fcrepo.war \
 	&& cp fcrepo.war /usr/local/tomcat7/webapps/fcrepo.war \
 	&& chown tomcat7:tomcat7 /usr/local/tomcat7/webapps/fcrepo.war 
 

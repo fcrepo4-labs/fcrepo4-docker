@@ -8,5 +8,9 @@ sed -i "s|#org.ops4j.pax.url.mvn.localRepository=|org.ops4j.pax.url.mvn.localRep
 /opt/karaf/bin/start
 sleep 60
 /root/fedora_camel_toolbox.sh
+/opt/karaf/bin/stop
+sleep 30
+/opt/karaf/bin/start
+sleep 60
 cd $CATALINA_HOME
 catalina.sh run
