@@ -10,6 +10,7 @@ This is the Git repo of the Docker image for [Fedora 4 docker](https://hub.docke
 
 1. `docker pull yinlinchen/fcrepo4-docker`
 2. `docker run -it -p 8080:8080 -p 9080:9080 -d yinlinchen/fcrepo4-docker:4.5.0`
+3. Use `docker ps` to check the "CONTAINER ID" and "STATUS". The container should be ready to use after 5 minutes.
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 
