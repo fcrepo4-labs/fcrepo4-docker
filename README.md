@@ -9,7 +9,7 @@ This is the Git repo of the Docker image for [Fedora 4 docker](https://hub.docke
 ## Usage
 
 1. `docker pull yinlinchen/fcrepo4-docker`
-2. `docker run -it -p 8080:8080 -p 9080:9080 -d yinlinchen/fcrepo4-docker:4.7.0`
+2. `docker run -it -p 8080:8080 -p 9080:9080 -d yinlinchen/fcrepo4-docker:4.7.1`
 3. Use `docker ps` to check the "CONTAINER ID" and "STATUS". The container should be ready to use after 5 minutes.
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
@@ -19,7 +19,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 * Ubuntu 14.04 64-bit machine with: 
   * [Tomcat 7.0.72](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
-  * [Fedora 4.7.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
+  * [Fedora 4.7.1](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
     * No authentication configured
   * [Solr 4.10.3](https://lucene.apache.org/solr/) at [http://localhost:8080/solr](http://localhost:8080/solr), for indexing & searching your content.
     * Installed in "/usr/local/tomcat7/solr"
