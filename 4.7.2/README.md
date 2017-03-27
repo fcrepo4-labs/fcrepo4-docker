@@ -39,12 +39,12 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 ## Fedora Configuration
 The default Docker build is Fedora 4 without WebAC and Audit capability.
 ```
-docker build -t="tag-default" .
+docker build -t="4.7.2-default" .
 ```
 
 To enable Fedora 4 with WebAC enabled.
 ```
-docker build --build-arg FedoraConfig=webac- --build-arg ModeshapeConfig=servlet-auth -t="tag-webac" .
+docker build --build-arg FedoraConfig=webac- --build-arg ModeshapeConfig=servlet-auth -t="4.7.2-webac" .
 ```
 Three Fedora user accounts are available:
   * user account testuser, with password password1
@@ -53,12 +53,12 @@ Three Fedora user accounts are available:
 
 To enable Fedora 4 with Audit capability. 
 ```
-docker build --build-arg FedoraConfig=audit- -t="tag-audit" .
+docker build --build-arg FedoraConfig=audit- -t="4.7.2-audit" .
 ```
 
 To enable Fedora 4 with WebAC and Audit capability.
 ```
-docker build --build-arg FedoraConfig=webac-audit- --build-arg ModeshapeConfig=servlet-auth -t="tag-webac-audit" .
+docker build --build-arg FedoraConfig=webac-audit- --build-arg ModeshapeConfig=servlet-auth -t="4.7.2-webac-audit" .
 ```
 
 ## Maintainers
