@@ -7,14 +7,43 @@ This is the Git repo of the Docker image for [Fedora 4 docker](https://hub.docke
 * [Docker](https://www.docker.com/)
 
 ## Usage
+Run Fedora with a file-based objects database (Default Fcrepo 4.7.5):
+```
+# Start server
+docker-compose up -d
 
+# Shutdown server
+docker-compose down
+```
+
+Run Fedora with a MySQL database:
+```
+# Start server
+docker-compose -f fcrepo-mysql.yml up -d
+
+# Shutdown server
+docker-compose -f fcrepo-mysql.yml down
+```
+
+Run Fedora with a PostgreSQL database:
+```
+# Start server
+docker-compose -f fcrepo-postgres.yml up -d
+
+# Shutdown server
+docker-compose -f fcrepo-postgres.yml down
+```
+
+Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)
+
+Run Fedora with Solr, Karaf, Fuseki, and Fcrepo-camel-toolbox
 1. `docker pull yinlinchen/fcrepo4-docker`
 2. `docker run -it -p 8080:8080 -d yinlinchen/fcrepo4-docker:4.7.5`
 3. Use `docker ps` to check the "CONTAINER ID" and "STATUS". The container should be ready to use after 5 minutes.
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 
-## In this Docker image
+## In this Docker image, see detail in [Dockerfile](Dockerfile)
 
 * Ubuntu 14.04 64-bit machine with: 
   * [Tomcat 7.0.72](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
