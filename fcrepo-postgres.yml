@@ -21,7 +21,7 @@ services:
           - fcrepo.docker.local
     ports:
       - 8080:8080
-  mysql:
+  postgres:
     container_name: postgres
     image: postgres:9
     networks:
