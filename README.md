@@ -46,7 +46,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 ## In this Docker image, see detail in [Dockerfile](Dockerfile)
 
 * Ubuntu 14.04 64-bit machine with: 
-  * [Tomcat 7.0.72](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
+  * [Tomcat 8.0.53](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
   * [Fedora 4.7.5](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
     * No authentication configured
