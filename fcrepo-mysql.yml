@@ -1,0 +1,36 @@
+version: "3.6"
+
+networks:
+  appnetwork:
+    driver: bridge
+
+services:
+  fcrepo:
+    container_name: fcrepo
+    build: 
+      context: ./docker/services/fcrepo
+      args:
+        FEDORA_VERSION: 4.7.5
+        FEDORA_TAG: 4.7.5
+        ModeshapeConfig: jdbc-mysql
+        JDBCConfig: -Dfcrepo.mysql.username=fcrepoadmin -Dfcrepo.mysql.password=fcrepoadminpw -Dfcrepo.mysql.host=mysql.docker.local -Dfcrepo.mysql.port=3306 
+    image: fcrepo
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo.docker.local
+    ports:
+      - 8080:8080
+  mysql:
+    container_name: mysql
+    image: mysql:5
+    networks:
+      appnetwork:
+        aliases:
+          - mysql.docker.local
+    environment:
+      MYSQL_ROOT_PASSWORD: secret-pw
+      MYSQL_USER: fcrepoadmin
+      MYSQL_PASSWORD: fcrepoadminpw
+      MYSQL_DATABASE: fcrepo
+

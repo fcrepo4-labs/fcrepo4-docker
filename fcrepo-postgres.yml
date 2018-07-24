@@ -1,0 +1,34 @@
+version: "3.6"
+
+networks:
+  appnetwork:
+    driver: bridge
+
+services:
+  fcrepo:
+    container_name: fcrepo
+    build: 
+      context: ./docker/services/fcrepo
+      args:
+        FEDORA_VERSION: 4.7.5
+        FEDORA_TAG: 4.7.5
+        ModeshapeConfig: jdbc-postgresql
+        JDBCConfig: -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=postgres.docker.local -Dfcrepo.postgresql.port=5432 
+    image: fcrepo
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo.docker.local
+    ports:
+      - 8080:8080
+  postgres:
+    container_name: postgres
+    image: postgres:9
+    networks:
+      appnetwork:
+        aliases:
+          - postgres.docker.local
+    environment:
+      POSTGRES_USER: fcrepoadmin
+      POSTGRES_PASSWORD: fcrepoadminpw
+      POSTGRES_DB: fcrepo
