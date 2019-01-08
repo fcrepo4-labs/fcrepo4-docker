@@ -7,7 +7,7 @@ This is the Git repo of the Docker image for [Fedora 5 docker](https://hub.docke
 * [Docker](https://www.docker.com/)
 
 ## Usage
-Run Fedora with a file-based objects database (Default Fcrepo 5.0.0-RC-1):
+Run Fedora with a file-based objects database (Default Fcrepo 5.0.0):
 ```
 # Start server
 docker-compose up -d
@@ -43,7 +43,7 @@ You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 * Ubuntu 14.04 64-bit machine with: 
   * [Tomcat 8.0.53](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
-  * [Fedora 5.0.0-RC-1](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
+  * [Fedora 5.0.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
 
   ps. MacOS: docker is configured to use the default machine with IP e.g. 192.168.99.100 or 127.0.0.1, the Fedora 4 URL is either [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo) or [http://127.0.0.1/fcrepo](http://127.0.0.1/fcrepo). You can use "docker-machine ip" to see your docker machine IP.
 
