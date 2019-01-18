@@ -10,8 +10,8 @@ services:
     build: 
       context: ./docker/services/fcrepo
       args:
-        FEDORA_VERSION: 5.0.0
-        FEDORA_TAG: 5.0.0
+        FEDORA_VERSION: 4.7.5
+        FEDORA_TAG: 4.7.5
         ModeshapeConfig: jdbc-mysql
         JDBCConfig: -Dfcrepo.mysql.username=fcrepoadmin -Dfcrepo.mysql.password=fcrepoadminpw -Dfcrepo.mysql.host=mysql.docker.local -Dfcrepo.mysql.port=3306 
     image: fcrepo

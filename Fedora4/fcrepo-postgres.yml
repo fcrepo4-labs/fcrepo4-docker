@@ -10,8 +10,8 @@ services:
     build: 
       context: ./docker/services/fcrepo
       args:
-        FEDORA_VERSION: 5.0.0
-        FEDORA_TAG: 5.0.0
+        FEDORA_VERSION: 4.7.5
+        FEDORA_TAG: 4.7.5
         ModeshapeConfig: jdbc-postgresql
         JDBCConfig: -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=postgres.docker.local -Dfcrepo.postgresql.port=5432 
     image: fcrepo
