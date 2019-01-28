@@ -7,28 +7,28 @@ This is the Git repo of the Docker image for [Fedora 5 docker](https://hub.docke
 * [Docker](https://www.docker.com/)
 
 ## Usage
-Run Fedora with a file-based objects database (Default Fcrepo 5.0.0):
+Run Fedora with a file-based objects database:
 ```
-# Start server
-docker-compose up -d
+# Start Fedora(e.g. 5.0.2) server
+FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose up -d
 
 # Shutdown server
 docker-compose down
 ```
 
-Run Fedora with a MySQL database:
+Run Fedora(e.g. 5.0.2) with a MySQL database:
 ```
 # Start server
-docker-compose -f fcrepo-mysql.yml up -d
+FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose -f fcrepo-mysql.yml up -d
 
 # Shutdown server
 docker-compose -f fcrepo-mysql.yml down
 ```
 
-Run Fedora with a PostgreSQL database:
+Run Fedora(e.g. 5.0.2) with a PostgreSQL database:
 ```
 # Start server
-docker-compose -f fcrepo-postgres.yml up -d
+FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose -f fcrepo-postgres.yml up -d
 
 # Shutdown server
 docker-compose -f fcrepo-postgres.yml down
@@ -38,12 +38,12 @@ Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
 
-## In this Docker image, see detail in [Dockerfile](Dockerfile)
+## In this Docker image, see detail in [Dockerfile](docker/services/fcrepo/Dockerfile)
 
-* Ubuntu 14.04 64-bit machine with: 
   * [Tomcat 8.0.53](https://tomcat.apache.org) at [http://localhost:8080](http://localhost:8080)
     * Manager username = "fedora4", password = "fedora4"
   * [Fedora 5.0.0](https://wiki.duraspace.org/display/FF/Downloads) at [http://localhost:8080/fcrepo](http://localhost:8080/fcrepo)
+    * username = "fedoraAdmin", password = "secret3"
 
   ps. MacOS: docker is configured to use the default machine with IP e.g. 192.168.99.100 or 127.0.0.1, the Fedora 4 URL is either [http://192.168.99.100:8080/fcrepo](http://192.168.99.100:8080/fcrepo) or [http://127.0.0.1/fcrepo](http://127.0.0.1/fcrepo). You can use "docker-machine ip" to see your docker machine IP.
 

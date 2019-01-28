@@ -10,8 +10,8 @@ services:
     build:
       context: ./docker/services/fcrepo
       args:
-        FEDORA_VERSION: 5.0.0
-        FEDORA_TAG: 5.0.0
+        FEDORA_VERSION: ${FEDORA_VERSION}
+        FEDORA_TAG: ${FEDORA_TAG}
     image: fcrepo
     networks:
       appnetwork:
