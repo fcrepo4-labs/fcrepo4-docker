@@ -34,6 +34,11 @@ FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose -f fcrepo-postgres.yml up -
 docker-compose -f fcrepo-postgres.yml down
 ```
 
+# Rebuild the docker image and start the Fedora (e.g. 5.0.0) server
+```
+FEDORA_VERSION=5.0.0 FEDORA_TAG=5.0.0 docker-compose up -d --force-recreate --build
+```
+
 Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
