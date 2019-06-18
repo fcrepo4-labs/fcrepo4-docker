@@ -10,7 +10,7 @@ This is the Git repo of the Docker image for [Fedora 5 docker](https://hub.docke
 Run Fedora with a file-based objects database:
 ```
 # Start Fedora(e.g. 5.0.2) server
-FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose up -d
+FEDORA_TAG=5.0.2 docker-compose up -d
 
 # Shutdown server
 docker-compose down
@@ -19,7 +19,7 @@ docker-compose down
 Run Fedora(e.g. 5.0.2) with a MySQL database:
 ```
 # Start server
-FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose -f fcrepo-mysql.yml up -d
+FEDORA_TAG=5.0.2 docker-compose -f fcrepo-mysql.yml up -d
 
 # Shutdown server
 docker-compose -f fcrepo-mysql.yml down
@@ -28,7 +28,7 @@ docker-compose -f fcrepo-mysql.yml down
 Run Fedora(e.g. 5.0.2) with a PostgreSQL database:
 ```
 # Start server
-FEDORA_VERSION=5.0.2 FEDORA_TAG=5.0.2 docker-compose -f fcrepo-postgres.yml up -d
+FEDORA_TAG=5.0.2 docker-compose -f fcrepo-postgres.yml up -d
 
 # Shutdown server
 docker-compose -f fcrepo-postgres.yml down
@@ -36,7 +36,7 @@ docker-compose -f fcrepo-postgres.yml down
 
 # Rebuild the docker image and start the Fedora (e.g. 5.0.0) server
 ```
-FEDORA_VERSION=5.0.0 FEDORA_TAG=5.0.0 docker-compose up -d --force-recreate --build
+FEDORA_TAG=5.0.0 docker-compose up -d --force-recreate --build
 ```
 
 Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)

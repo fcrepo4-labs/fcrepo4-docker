@@ -4,8 +4,7 @@ MAINTAINER Yinlin Chen "ylchen@vt.edu"
 
 RUN apt-get update && apt-get -y upgrade
 
-# Install Fedora4
-ARG FEDORA_VERSION=
+# Install Fedora 5
 ARG FEDORA_TAG=
 ARG FedoraConfig=
 ARG ModeshapeConfig=file-simple
