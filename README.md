@@ -34,11 +34,20 @@ FEDORA_TAG=5.0.2 docker-compose -f fcrepo-postgres.yml up -d
 docker-compose -f fcrepo-postgres.yml down
 ```
 
+Run Fedora(e.g. 5.0.2) with Camel Toolbox customizations:
+```
+# Start server
+FEDORA_TAG=5.0.2 docker-compose -f fcrepo-camel.yml up -d
+
+# Shutdown server
+docker-compose -f fcrepo-camel.yml down
+```
+ * See [Camel](docker/services/fcrepo-camel) section for details.
+
 # Rebuild the docker image and start the Fedora (e.g. 5.0.0) server
 ```
 FEDORA_TAG=5.0.0 docker-compose up -d --force-recreate --build
 ```
-
 Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)
 
 You can shell into the machine with `docker exec -i -t "CONTAINER ID" /bin/bash`
