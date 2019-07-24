@@ -1,0 +1,38 @@
+@prefix :      <#> .
+@prefix ja:    <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:   <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix fuseki: <http://jena.apache.org/fuseki#> .
+
+# This triple is defined pre-emptively, as it is needed for
+# Fuseki 2.4.0 (with inference and TDB); it is fixed for
+# future releases and not necessary for earlier versions.
+tdb:GraphTDB    rdfs:subClassOf  ja:Model .
+
+<#testService>  a                   fuseki:Service ;
+        rdfs:label                    "test" ;
+        fuseki:name                   "test" ;
+        fuseki:serviceQuery           "query" , "sparql" ;
+        fuseki:serviceReadGraphStore  "get" ;
+        fuseki:serviceReadWriteGraphStore "data" ;
+        fuseki:serviceUpdate          "update" ;
+        fuseki:serviceUpload          "upload" ;
+        fuseki:dataset                <#dataset> .
+
+<#dataset> a ja:RDFDataset ;
+    ja:defaultGraph <#model> .
+
+<#model> a ja:InfModel ;
+    ja:baseModel <#tdbGraph> ;
+    ja:content <#fedoraInf> ;
+    ja:reasoner [
+        ja:reasonerURL <http://jena.hpl.hp.com/2003/OWLFBRuleReasoner>] .
+
+<#tdbGraph> a tdb:GraphTDB ;
+    tdb:dataset <#tdbDataset> .
+
+<#tdbDataset> a tdb:DatasetTDB ;
+    tdb:location "/etc/fuseki/databases/test_data" .
+
+<#fedoraInf> ja:literalContent "<http://fedora.info/definitions/v4/repository#hasParent> owl:inverseOf <http://www.w3.org/ns/ldp#contains>" .

@@ -1,6 +1,6 @@
 FROM tomcat:8.0-jre8
 
-MAINTAINER Yinlin Chen "ylchen@vt.edu"
+LABEL maintainer="Yinlin Chen <ylchen@vt.edu>"
 
 RUN apt-get update && apt-get -y upgrade
 

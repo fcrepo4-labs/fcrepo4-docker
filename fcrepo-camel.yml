@@ -1,0 +1,21 @@
+version: "3.6"
+
+networks:
+  appnetwork:
+    driver: bridge
+
+services:
+  fcrepo:
+    container_name: fcrepo
+    build:
+      context: ./docker/services/fcrepo-camel
+      args:
+        FEDORA_TAG: ${FEDORA_TAG}
+    image: fcrepo
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo.docker.local
+    ports:
+      - 8080:8080
+      - 8181:8181
