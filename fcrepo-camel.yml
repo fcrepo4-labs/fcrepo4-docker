@@ -6,12 +6,12 @@ networks:
 
 services:
   fcrepo:
-    container_name: fcrepo
+    container_name: fcrepo-camel
     build:
       context: ./docker/services/fcrepo-camel
       args:
         FEDORA_TAG: ${FEDORA_TAG}
-    image: fcrepo
+    image: fcrepo-camel
     networks:
       appnetwork:
         aliases:
