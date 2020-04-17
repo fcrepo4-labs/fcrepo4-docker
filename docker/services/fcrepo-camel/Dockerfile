@@ -30,8 +30,8 @@ ENV SOLR_VERSION 4.10.3
 ENV SOLR_HOME /usr/local/tomcat/solr
 
 RUN cd /tmp \
-	&& curl -fSL http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz -o solr-$SOLR_VERSION.tgz \
-	&& curl -fSL http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar -o commons-logging-1.1.2.jar \
+	&& curl -fSL https://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz -o solr-$SOLR_VERSION.tgz \
+	&& curl -fSL https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar -o commons-logging-1.1.2.jar \
 	&& mkdir -p "$SOLR_HOME" \
 	&& mkdir -p /var/lib/tomcat/ \
 	&& tar -xzf solr-"$SOLR_VERSION".tgz \
@@ -60,7 +60,7 @@ RUN cd && mkdir -p "$FUSEKI_BASE" \
 	&& mkdir -p "$FUSEKI_BASE"/configuration \
 	&& chown -hR root:root $FUSEKI_BASE \
 	&& cd /tmp \
-	&& curl -fSL http://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz -o apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
+	&& curl -fSL https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz -o apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
 	&& tar -xzvf apache-jena-fuseki-$FUSEKI_VERSION.tar.gz \
 	&& mv apache-jena-fuseki-"$FUSEKI_VERSION" jena-fuseki1-"$FUSEKI_VERSION" \
 	&& cd jena-fuseki1-"$FUSEKI_VERSION" \
@@ -80,10 +80,13 @@ ENV KARAF_VERSION 4.0.5
 COPY config/karaf_service.script /root/
 
 RUN cd /tmp \
-	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "http://archive.apache.org/dist/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
+	&& wget -q -O "apache-karaf-$KARAF_VERSION.tar.gz" "https://archive.apache.org/dist/karaf/"$KARAF_VERSION"/apache-karaf-"$KARAF_VERSION".tar.gz" \
 	&& tar -zxvf apache-karaf-$KARAF_VERSION.tar.gz \
 	&& mv /tmp/apache-karaf-$KARAF_VERSION /opt \
 	&& ln -s "/opt/apache-karaf-$KARAF_VERSION" /opt/karaf
+
+RUN sed -i "s/http:\/\/repo1.maven.org/https:\/\/repo1.maven.org/g" /opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+
 
 # Fedora Camel Toolbox
 COPY config/fedora_camel_toolbox.script /root/
