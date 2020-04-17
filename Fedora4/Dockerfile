@@ -46,8 +46,8 @@ ENV SOLR_HOME /usr/local/tomcat/solr
 RUN cd /tmp \
 	&& mkdir -p /var/lib/tomcat/fcrepo4-data \
 	&& chmod g-w /var/lib/tomcat/fcrepo4-data \
-	&& curl -fSL http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz -o solr-$SOLR_VERSION.tgz \
-	&& curl -fSL http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar -o commons-logging-1.1.2.jar \
+	&& curl -fSL https://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz -o solr-$SOLR_VERSION.tgz \
+	&& curl -fSL https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar -o commons-logging-1.1.2.jar \
 	&& mkdir -p "$SOLR_HOME" \
 	&& tar -xzf solr-"$SOLR_VERSION".tgz \
 	&& cp -v /tmp/solr-"$SOLR_VERSION"/dist/solr-"$SOLR_VERSION".war /usr/local/tomcat/webapps/solr.war \
