@@ -20,7 +20,7 @@ The reindexing service has been configured to bind to the host, `0.0.0.0`, inste
 	git clone https://github.com/fcrepo4-labs/fcrepo4-docker.git
 	cd fcrepo4-docker
     # Start server
-    FEDORA_TAG=5.0.2 docker-compose -f fcrepo-camel.yml up -d
+    FEDORA_TAG=5.1.0 docker-compose -f fcrepo-camel.yml up -d
     # Shutdown server
     docker-compose -f fcrepo-camel.yml down
     ```
